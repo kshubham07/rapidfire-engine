@@ -1,5 +1,6 @@
 function api (app) {
     
+    var requestModels = require("./app/models/request-models.js")
     var firebase = require("firebase");
     var config = {
       apiKey: "AIzaSyBgAM5jSK6KvBScur-k-fC1PsmIe8afH_4",
@@ -12,19 +13,29 @@ function api (app) {
     var database = firebase.database;
 
     app.post("/api/user", function (request, response) {
-        console.log(request.body);
-        if(!request.body.name || !request.body.age)
+        var validJson = validatePostUser(request.body,requestModels.postUserModel);
+        if(!validJson)
             response.send("Bad request");
         else
         {
-            var newPostKey = database().ref().child('USERS').push().key;
-                database().ref().child('USERS').child(newPostKey).set({
-                name : request.body.name,
-                age : request.body.age
-            });
-        response.send(newPostKey+" is the key inserted");
+            var newTeamKey = database().ref().child('TEAMS').push().key;
+            var newUserKey = database().ref().child('USERS').push().key;
+            var userJson = {};
+            userJson[newUserKey] = 1;
+            database().ref().child('TEAMS').child(newTeamKey).set(userJson);
+            var teamJson = {};
+            teamJson[newTeamKey] = 1;
+            validJson["user_teams"] = teamJson;
+            validJson["user_status"] = 1;
+            database().ref().child('USERS').child(newUserKey).set(validJson);
+            response.send(newUserKey+" is the key inserted");
         }
     });
+    
+    function validatePostUser(objA, objB)
+    {
+        return objA;
+    }
     
 };
 
