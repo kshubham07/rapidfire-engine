@@ -12,7 +12,11 @@ function api (app) {
 
     var database = firebase.database;
 
-    app.post("/api/user", function (request, response) {
+    app.get("/api/user", function (request, response) {
+		response.send("Hello World");
+	});
+	
+	app.post("/api/user", function (request, response) {
         var validJson = validatePostUser(request.body,requestModels.postUserModel);
         if(!validJson)
             response.send("Bad request");
