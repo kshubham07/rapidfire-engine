@@ -1,0 +1,25 @@
+{
+  "name": "rapidfire",
+  "version": "1.0.0",
+  "description": "This is the server for a multiplayer game, wherein groups of users are pitted against each other to answer questions more accurately and quicker than their opponents.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "firebase": "^4.5.0",
+    "mongojs": "^0.18.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kshubham07/rapidfire-engine.git"
+  },
+  "author": "Kumar Shubham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kshubham07/rapidfire-engine/issues"
+  },
+  "homepage": "https://github.com/kshubham07/rapidfire-engine#readme"
+}
